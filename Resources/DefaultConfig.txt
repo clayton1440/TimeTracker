@@ -1,0 +1,79 @@
+!TimeTracker Settings
+!The values below are configurable settings for TimeTracker.
+!All settings below must have a value unless otherwise noted.
+!These settings should be modified using the TimeTracker Interface.
+!
+!Format:
+!;							Separator
+!Key=Value					Key and Value. The entire setting is disabled when this line is commented out (starts with "!")
+!KeyDisplayName				Display Name of the setting
+!KeyGroup					Group multiple keys by setting them with the same KeyGroup
+!DefaultValue				The default value, or blank if no default
+!KeyType					The expected value type
+!RestartRequired			True or False if TimeTracker needs to be restarted before changes will take effect
+!Description				Variable number of lines containing a description of the property
+!;							Separator
+!Key=Value					Settings using only a key and value are not visible to the user in TimeTracker
+!Description				Add a description if you like
+!;							Separator
+
+
+
+;
+FontSize=9
+Font Size
+Appearance
+9
+System.Int32
+True
+The size, in points, of the font used by TimeTracker.
+;
+RowHeight=22
+Row Height
+Appearance
+22
+System.Int32
+True
+The height, in pixels, of each row in the TimeTracker grid.
+;
+StartMaximized=False
+!Value indicating whether TimeTracker will open with a maximized window.
+;
+FormHeight=600
+!Start size/position of the form. When the form is resized/moved, the new size/position is saved automatically.
+;
+FormWidth=1000
+!Start size/position of the form. When the form is resized/moved, the new size/position is saved automatically.
+;
+FormX=400
+!Start position of the form. When the form is resized/moved, the new size/position is saved automatically.
+;
+FormY=400
+!Start position of the form. When the form is resized/moved, the new size/position is saved automatically.
+;
+ShowNodeToolTips=True
+Node Tool Tips
+Appearance
+True
+System.Boolean
+False
+Value indicating whether the date range will be displayed when the user hovers over a week in the left panel of TimeTracker.
+;
+DatabasePath=%
+Database Path
+General
+%
+System.String
+True
+The file path of the TimeTracker database.
+Set to '%' to use the default AppData directory.
+;
+WeekStartDay=Sunday
+First Day of Week
+General
+Sunday
+System.DayOfWeek
+False
+The first day of the work week. 
+TimeTracker automatically loads the current week at startup. On this day, a new empty week is shown.
+;
