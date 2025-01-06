@@ -1,7 +1,6 @@
 ﻿
 
 Imports System.ComponentModel
-Imports System.Drawing.Drawing2D
 
 Public Class InterfaceForm
 
@@ -58,7 +57,7 @@ Public Class InterfaceForm
 			Me.StartPosition = FormStartPosition.CenterScreen
 		End If
 
-		moveTimer.Interval = 500
+		moveTimer.Interval = 250
 		moveTimer.AutoReset = False
 		Me.MinimumSize = NewSizeFromScale(Me.MinimumSize)
 		SplitContainer2.SplitterDistance = Math.Round(150 * DisplayScale())
@@ -71,11 +70,13 @@ Public Class InterfaceForm
 			WindowState = FormWindowState.Maximized
 		End If
 
+		AutoChargeReferenceChanged()
 		LoadTreeView()
 		LoadSelectedEntries()
 
 		AddHandler Config.Properties.ShowNodeToolTipsValueChanged, AddressOf SetToolTipConfig
 		AddHandler Config.Properties.WeekStartDayChanged, AddressOf RefreshButton_Click
+		AddHandler Config.Properties.AutoChargeReferenceChanged, AddressOf AutoChargeReferenceChanged
 		AddHandler ChargeCodeReference.ChargeCodesChanged, AddressOf ReloadChargeCodes
 		AddHandler moveTimer.Elapsed, AddressOf SaveFormLocation
 	End Sub
@@ -138,11 +139,11 @@ Public Class InterfaceForm
 	End Sub
 
 	Private Sub PrintButton1_Click(sender As Object, e As EventArgs) Handles PrintButton1.Click
-
+		'Not Visible
 	End Sub
 
 	Private Sub PrintPreviewButton1_Click(sender As Object, e As EventArgs) Handles PrintPreviewButton1.Click
-
+		'Not Visible
 	End Sub
 
 	Private Sub ExitButton1_Click(sender As Object, e As EventArgs) Handles ExitButton1.Click
@@ -164,6 +165,7 @@ Public Class InterfaceForm
 		ChargeCodeReference.Show()
 	End Sub
 	Private Sub RefreshButton_Click(sender As Object, e As EventArgs) Handles RefreshButton1.Click, RefreshButton3.Click
+		'refreshes the entire form, including the treenode. if any empty weeks were added by the user, they will disappear
 		Console.WriteLine("Refresh")
 		Dim sWeek As String = WeekComboBox.SelectedItem
 		TreeView1.Nodes.Clear()
@@ -286,6 +288,10 @@ Public Class InterfaceForm
 
 		If Not WeekComboBox.Items.Contains($"Week {todayWeek}, {todayYear}") Then
 			Dim yearNode As TreeNode = FindNode(todayYear.ToString)
+			If yearNode Is Nothing Then
+				yearNode = TreeView1.Nodes.Add(todayYear.ToString)
+				yearNode.Tag = todayYear
+			End If
 			selectNode = yearNode.Nodes.Add($"Week {todayWeek}, {todayYear}")
 			Dim weekStart As Date = Timesheet.GetFirstDayOfWorkWeek(todayYear, todayWeek, weekStartDay)
 			selectNode.Tag = todayWeek
@@ -315,6 +321,11 @@ Public Class InterfaceForm
 		Next
 	End Sub
 
+	Private AutoChargeRef As Boolean = False
+	Private Sub AutoChargeReferenceChanged()
+		AutoChargeRef = Config.Properties.AutoChargeReference
+	End Sub
+
 	Private Sub ReloadChargeCodes()
 		TimesheetControl1.ChargeCodes = GetChargeCodesEnumerable().ToList
 	End Sub
@@ -325,7 +336,8 @@ Public Class InterfaceForm
 		te.Id = id
 		e.Id = id
 		selectedEntries.Add(te)
-		Database.UpdateChargeCodes()
+		If AutoChargeRef Then Database.UpdateChargeCodes()
+		ReloadChargeCodes()
 	End Sub
 
 	Private Sub TimesheetControl1_EntryChanged(sender As TimesheetControl.TimesheetControl, e As TimesheetControl.TimesheetEntryEventArgs) Handles TimesheetControl1.EntryChanged
@@ -333,7 +345,8 @@ Public Class InterfaceForm
 		Select Case e.ChangedColumn
 			Case 0
 				te.ChargeCode = e.ChargeCode
-				Database.UpdateChargeCodes()
+				If AutoChargeRef Then Database.UpdateChargeCodes()
+				ReloadChargeCodes()
 			Case 1
 				te.Comment = e.Comment
 			Case 2
@@ -360,4 +373,5 @@ Public Class InterfaceForm
 	Private Sub InterfaceForm_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
 		Config.Properties.StartMaximized = Me.WindowState = FormWindowState.Maximized
 	End Sub
+
 End Class

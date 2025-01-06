@@ -63,6 +63,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property _24_hours() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("_24_hours", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property _new() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("_new", resourceCulture)
@@ -164,15 +174,16 @@ Namespace My.Resources
         '''  Looks up a localized string similar to CREATE TABLE TimeEntries (
         '''	ID INTEGER PRIMARY KEY AUTOINCREMENT,
         '''	Date TEXT NOT NULL,
-        '''	ChargeCode TEXT NOT NULL,
-        '''	StartTime REAL NOT NULL,
+        '''	ChargeCode TEXT,
+        '''	StartTime REAL,
         '''	EndTime REAL,
         '''	Comment TEXT	
         ''');
         '''
         '''CREATE TABLE ChargeCodes (
         '''	ChargeCode TEXT PRIMARY KEY,
-        '''	Description TEXT
+        '''	Description TEXT,
+        '''	ID INTEGER AUTOINCREMENT
         ''');
         '''
         '''CREATE INDEX TimeEntries_Date ON TimeEntries(Date);.
@@ -191,10 +202,10 @@ Namespace My.Resources
         '''!
         '''!Format:
         '''!;							Separator
-        '''!Key=Value					Key and Value. The entire setting is disabled when this line is commented out (starts with &quot;!&quot;).
+        '''!Key=Value					Key and Value. The entire setting is disabled when this line is commented out (starts with &quot;!&quot;)
         '''!KeyDisplayName				Display Name of the setting
         '''!KeyGroup					Group multiple keys by setting them with the same KeyGroup
-        '''!DefaultValue				The defaul [rest of string was truncated]&quot;;.
+        '''!DefaultValue				The default [rest of string was truncated]&quot;;.
         '''</summary>
         Friend ReadOnly Property DefaultConfig() As String
             Get

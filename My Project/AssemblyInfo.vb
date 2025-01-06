@@ -9,10 +9,10 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("TimeTracker")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyDescription("Simple time management tool developed for use at BAE Systems Inc., Space & Mission Systems")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("TimeTracker")>
-<Assembly: AssemblyCopyright("Copyright © Clayton Gross 2024")>
+<Assembly: AssemblyCopyright("Copyright © Clayton Gross 2025")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -28,5 +28,5 @@ Imports System.Runtime.InteropServices
 '      Revision
 '
 
-<Assembly: AssemblyVersion("1.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0")>
+<Assembly: AssemblyVersion("1.0.*")>
+<Assembly: AssemblyFileVersion("1.0.*")>

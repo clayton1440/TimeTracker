@@ -13,7 +13,8 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>false</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -120,6 +121,7 @@
     <Compile Include="AddWeekForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="BooleanTypeConverter.vb" />
     <Compile Include="ChargeCodeReference.Designer.vb">
       <DependentUpon>ChargeCodeReference.vb</DependentUpon>
@@ -132,6 +134,12 @@
     <Compile Include="DaySelectorDropDown.vb" />
     <Compile Include="DynamicConfig.vb" />
     <Compile Include="DynamicPropertyDescriptor.vb" />
+    <Compile Include="ExceptionHandler.designer.vb">
+      <DependentUpon>ExceptionHandler.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ExceptionHandler.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InterfaceForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ChargeCodeReference.resx">
       <DependentUpon>ChargeCodeReference.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionHandler.resx">
+      <DependentUpon>ExceptionHandler.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfaceForm.resx">
       <DependentUpon>InterfaceForm.vb</DependentUpon>
@@ -345,6 +356,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="24-hours.ico" />
+    <None Include="Resources\24-hours.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />

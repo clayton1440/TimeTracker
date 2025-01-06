@@ -68,7 +68,7 @@ True
 The file path of the TimeTracker database.
 Set to '%' to use the default AppData directory.
 ;
-WeekStartDay=Sunday
+WeekStartDay=Saturday
 First Day of Week
 General
 Sunday
@@ -76,4 +76,14 @@ System.DayOfWeek
 False
 The first day of the work week. 
 TimeTracker automatically loads the current week at startup. On this day, a new empty week is shown.
+;
+AutoChargeReference=True
+Auto. Charge Code Reference
+General
+Automatic
+System.Boolean
+False
+TimeTracker automatically adds charge codes to the Charge Code Reference when they are used. Charge codes in the reference display in the timesheet drop-down.
+When Enabled, charge codes older than two weeks can safely be removed from the Charge Code Reference without them being added again automatically.
+When Disabled, charge codes must be manually added to and removed from the charge code reference.
 ;

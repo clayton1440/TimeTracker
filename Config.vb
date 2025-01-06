@@ -3,6 +3,7 @@ Imports System.IO
 
 Public Class Config
 	Public Class Properties
+		Public Shared Event DatabasePathChanged As EventHandler
 		Public Shared Property DatabasePath As String
 			Get
 				Dim value As String = ReadConfig("DatabasePath").ToString.Trim(""""c, "'"c, vbCrLf, vbCr, vbLf, " "c)
@@ -12,7 +13,7 @@ Public Class Config
 				Return value
 			End Get
 			Set(value As String)
-				WriteConfig("DatabasePath", value)
+				If WriteConfig("DatabasePath", value) Then RaiseEvent DatabasePathChanged(Nothing, New EventArgs())
 			End Set
 		End Property
 
@@ -34,12 +35,13 @@ Public Class Config
 			End Set
 		End Property
 
+		Public Shared Event FontSizeChanged As EventHandler
 		Public Shared Property FontSize As Integer
 			Get
 				Return CType(ReadConfig("FontSize"), Integer)
 			End Get
 			Set(value As Integer)
-				WriteConfig("FontSize", value.ToString)
+				If WriteConfig("FontSize", value.ToString) Then RaiseEvent FontSizeChanged(Nothing, New EventArgs)
 			End Set
 		End Property
 
@@ -58,8 +60,18 @@ Public Class Config
 				Return CType(ReadConfig("ShowNodeToolTips"), Boolean)
 			End Get
 			Set(value As Boolean)
-				WriteConfig("ShowNodeToolTips", value.ToString)
-				RaiseEvent ShowNodeToolTipsValueChanged(Nothing, New EventArgs())
+				If WriteConfig("ShowNodeToolTips", value.ToString) Then RaiseEvent ShowNodeToolTipsValueChanged(Nothing, New EventArgs())
+
+			End Set
+		End Property
+
+		Public Shared Event AutoChargeReferenceChanged As EventHandler
+		Public Shared Property AutoChargeReference As Boolean
+			Get
+				Return CType(ReadConfig("AutoChargeReference"), Boolean)
+			End Get
+			Set(value As Boolean)
+				If WriteConfig("AutoChargeReference", value.ToString) Then RaiseEvent AutoChargeReferenceChanged(Nothing, New EventArgs())
 			End Set
 		End Property
 

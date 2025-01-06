@@ -25,4 +25,8 @@
 	Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
 		Process.Start("mailto:TimeTracker@claytongross.net?subject=Support%20Request&body=Please%20provide%20details%20of%20your%20support%20request%20here.")
 	End Sub
+
+	Private Sub LinkLabel2_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
+		Process.Start("mailto:TimeTracker@claytongross.net?subject=Feature%20Request&body=Please%20provide%20details%20of%20your%20feature%20request%20here.")
+	End Sub
 End Class

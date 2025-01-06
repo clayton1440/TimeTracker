@@ -454,7 +454,7 @@ VALUES (@Date, @StartTime, @EndTime, @Comment, @ChargeCode) RETURNING ID;"
 		End Sub
 
 		Public Shared Sub Update()
-			UpdateChargeCodes()
+
 		End Sub
 
 		Public Shared Sub UpdateChargeCodes()
