@@ -8,9 +8,9 @@ CREATE TABLE TimeEntries (
 );
 
 CREATE TABLE ChargeCodes (
-	ChargeCode TEXT PRIMARY KEY,
-	Description TEXT,
-	ID INTEGER AUTOINCREMENT
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
+	ChargeCode TEXT,
+	Description TEXT
 );
 
 CREATE INDEX TimeEntries_Date ON TimeEntries(Date);
